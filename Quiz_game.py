@@ -1,58 +1,65 @@
-# Dictionary containing all the questions and correct answers
+# List containing all the questions, choices and correct answers
+import random
 
-Questions = {
-    "How many planets are in the solar system?: ": "A",
-    "Which planet is the hottest?: ": "B",
-    "How long does it take sunlight to reach earth?: ": "C",
-    "Which planet is referred to as the red planet?: ": "C",
-    "What is the furthest planet from the sun?: ": "D"
-    }
+Questions = [
+    {"text": "How many planets are in the solar system? ",
+     "choices": ("A. 8", "B. 9", "C. 4", "D. 2"),
+     "answer": "A"},
+    {"text": "Which planet is the hottest? ",
+     "choices": ("A. Mercury", "B. Venus", "C. Mars", "D. Earth"),
+     "answer": "B"},
+    {"text": "How long does it take sunlight to reach earth? ",
+     "choices": ("A. 2 hrs", "B. 30 min", "C. 8 min", "D. 24 hrs"),
+     "answer": "C"},
+    {"text": "Which planet is referred to as the red planet? ",
+     "choices": ("A. Jupiter", "B. Neptune", "C. Mars", "D. Saturn"),
+     "answer": "C"},
+    {"text": "What is the furthest planet from the sun? ",
+     "choices": ("A. Pluto", "B. Venus", "C. Mercury", "D. Neptune"),
+     "answer": "D"}
+]
 
-# tuple with all the available choices
+# creating a score variable
+score = 0
+# Using the random module to shuffle through questions order
 
-Choices = (("A. 8", "B. 9", "C. 4", "D. 2"),
-           ("A. Mercury", "B. Venus", "C Mars", "D. Earth"),
-           ("A. 2 hrs", "B. 30 min", "C. 8 min", "D. 24 hrs"),
-           ("A. Jupiter", "B. Neptune", "C. Mars", "D. Saturn"),
-           ("A. Pluto", "B. Venus", "C. Mercury", "D. Neptune"))
-
-# creating a score and question number variable
-Score = 0
-Question_num = 0
-
+random.shuffle(Questions)
 # Using for loop to go through questions
 
-for Question in Questions:
+for question in Questions:
+    print(question["text"])
     print()
-    print(Question)
-    for choice in Choices[Question_num]:
+    for choice in question["choices"]:
         print(choice)
 
 # requesting and checking user input
-    your_answer = input("Enter (A, B, C, D): ")
+    your_answer = input("Enter (A, B, C, D): ").upper()
     valid_answer = ["A", "B", "C", "D"]
+# 
+    while your_answer not in valid_answer:
+        your_answer = input("Enter (A, B, C, D): ").upper()
 
-    if your_answer == Questions[Question]:
-         Score += 1 
+
+    if your_answer == question["answer"]:
+         score += 1 
          print("CORRECT!") 
     else:
          print("INCORRECT!") 
 
 
-    Question_num += 1
 
 # Showing final score
 print("Quiz complete!!!")
 
 
-print(f"You got {Score} out of 5")  
+print(f"You got {score} out of 5")  
 
 # Providing feedback based on final score
 
-if Score == 5:
+if score == 5:
      print("Excellent!")
 
-elif Score < 5 and Score > 2:
+elif score < 5 and score > 2:
      print("Good")
      
 else:
